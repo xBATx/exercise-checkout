@@ -17,7 +17,13 @@ case class Buy1Get1Free (itemPrice: Double) extends PriceCalculationStrategy {
 }
 
 case class Buy3Pay2 (itemPrice: Double) extends PriceCalculationStrategy {
-  def getPrice(quantity: Int): Double = 0
+  def getPrice(quantity: Int): Double = {
+    if (quantity > 2) {
+      val countedQuantity = quantity - (quantity / 3)
+      countedQuantity * itemPrice
+    }
+    else quantity * itemPrice
+  }
 }
 
 

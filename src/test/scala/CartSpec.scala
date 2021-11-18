@@ -19,10 +19,10 @@ class CartSpec extends AnyFlatSpec with Matchers {
   }
 
   it should "apply buy 1 get 1 free promotion for apples" in {
-    exercise2Cart.calculatePrice(List("apple", "apple", "orange", "apple")) shouldBe 2.05
+    exercise2Cart.calculatePrice(List("apple", "apple", "orange", "apple")) shouldBe 1.45
   }
 
   it should "apply buy 3 pay 2 promotion for oranges" in {
-    exercise2Cart.calculatePrice(List("apple", "orange", "orange", "orange")) shouldBe 2.05
+    exercise2Cart.calculatePrice(List("apple", "orange", "orange", "orange")) shouldBe 1.1
   }
 }
