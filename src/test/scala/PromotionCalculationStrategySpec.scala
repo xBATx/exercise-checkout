@@ -25,11 +25,13 @@ class PromotionCalculationStrategySpec extends AnyFlatSpec with Matchers {
     val promotedProduct: Product = Product("banana", price = 10)
 
     Buy2GetAnotherFree(baseProduct, promotedProduct.id)
-      .getPromotionPrice(Set(ProductQuantity(baseProduct, quantity = 1), ProductQuantity(promotedProduct, 2))) shouldBe 21
+      .getPromotionPrice(Set(ProductQuantity(baseProduct, quantity = 1), ProductQuantity(promotedProduct, 2))) shouldBe 0
     Buy2GetAnotherFree(baseProduct, promotedProduct.id)
-      .getPromotionPrice(Set(ProductQuantity(baseProduct, quantity = 2), ProductQuantity(promotedProduct, 2))) shouldBe 12
+      .getPromotionPrice(Set(ProductQuantity(baseProduct, quantity = 2), ProductQuantity(promotedProduct, 2))) shouldBe 10
     Buy2GetAnotherFree(baseProduct, promotedProduct.id)
-      .getPromotionPrice(Set(ProductQuantity(baseProduct, quantity = 4), ProductQuantity(promotedProduct, 2))) shouldBe 4
+      .getPromotionPrice(Set(ProductQuantity(baseProduct, quantity = 4), ProductQuantity(promotedProduct, 2))) shouldBe 20
+    Buy2GetAnotherFree(baseProduct, promotedProduct.id)
+      .getPromotionPrice(Set(ProductQuantity(baseProduct, quantity = 8), ProductQuantity(promotedProduct, 2))) shouldBe 20
   }
 
 }

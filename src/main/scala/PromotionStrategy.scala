@@ -29,8 +29,19 @@ sealed trait PromotionStrategy {
    }
 
    case class Buy2GetAnotherFree(product: Product, freeProductId: String) extends PromotionStrategy {
-     def getPromotionPrice(productsWithQuantities: Set[ProductQuantity]): BigDecimal = 0
+     def getPromotionPrice(productsWithQuantities: Set[ProductQuantity]): BigDecimal = {
+       val relatedProductWithQuantity = productsWithQuantities.find(_.product.id == product.id)
+       relatedProductWithQuantity.map {
+         case pq if pq.quantity > 1 =>
+           val promotedQuantity = pq.quantity / 2
+           productsWithQuantities.collectFirst {
+             case ProductQuantity(product, quantity) if product.id == freeProductId => Math.min(promotedQuantity, quantity) * product.price
+           }.getOrElse(zero)
+         case _ => zero
+       }.getOrElse(0)
+     }
    }
+
  }
 
 
