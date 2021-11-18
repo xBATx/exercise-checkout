@@ -1,1 +1,1 @@
-final case class Product(id: String, priceCalculationStrategy: PriceCalculationStrategy)
+final case class Product(id: String, price: BigDecimal)

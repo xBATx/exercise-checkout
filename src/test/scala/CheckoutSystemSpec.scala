@@ -1,13 +1,19 @@
-import org.scalatest._
-import flatspec._
-import matchers.should.Matchers
-import PriceCalculationStrategy._
+import PromotionStrategy._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
 class CheckoutSystemSpec extends AnyFlatSpec with Matchers {
-  val exercise1CheckoutSystem = new CheckoutSystem(Set(Product("apple", Default(0.6)), Product("orange", Default(0.25))))
-  val exercise2CheckoutSystem = new CheckoutSystem(Set(Product("apple", Buy1Get1Free(0.6)), Product("orange", Buy3Pay2(0.25))))
 
-  "Cart.calculatePrice" should "return 0 price if the cart is empty" in {
+  val apple: Product = Product("apple", 0.6)
+  val orange: Product = Product("orange", 0.25)
+
+  val exercise1CheckoutSystem = new CheckoutSystem(Set(apple, orange))
+  val exercise2CheckoutSystem = new CheckoutSystem(
+    Set(apple, orange),
+    Set(Buy1Get1Free(apple), Buy3Pay2(orange))
+  )
+
+  "CheckoutSystem.calculatePrice" should "return 0 price if the cart is empty" in {
     exercise1CheckoutSystem.calculatePrice(Nil) shouldBe 0
   }
 
