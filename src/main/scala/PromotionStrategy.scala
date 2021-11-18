@@ -11,7 +11,7 @@ sealed trait PromotionStrategy {
        relatedProductWithQuantity.map {
          case ProductQuantity(product, quantity) if quantity > 1 => quantity / 2 * product.price
          case _ => zero
-       }.getOrElse(zero)
+       }.getOrElse(0)
      }
    }
 
@@ -24,8 +24,12 @@ sealed trait PromotionStrategy {
               quantity / 3 * product.price
            }
            else zero
-       }.getOrElse(zero)
+       }.getOrElse(0)
      }
+   }
+
+   case class Buy2GetAnotherFree(product: Product, freeProductId: String) extends PromotionStrategy {
+     def getPromotionPrice(productsWithQuantities: Set[ProductQuantity]): BigDecimal = 0
    }
  }
 
