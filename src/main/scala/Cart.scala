@@ -1,5 +1,10 @@
 class Cart(supportedProducts: Set[Product]) {
 
-  def calculatePrice(products: List[String]): Double = -1
+  def calculatePrice(products: List[String]): Double = {
+    val countedProducts = products.groupBy(s => s).view.mapValues(_.length).toMap
+    countedProducts.flatMap {
+      case (product, quantity) => supportedProducts.find(_.id == product).map(p => p.price * quantity)
+    }.sum
+  }
 
 }
