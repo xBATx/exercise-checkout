@@ -9,7 +9,6 @@ object Main extends App {
   val promotionStrategies: Set[PromotionStrategy] = Set(Buy1Get1Free(apple), Buy3Pay2(orange), Buy2GetAnotherFree(orange, banana.id))
   val checkoutSystem = new CheckoutSystem(supportedProducts, promotionStrategies)
 
-  // TODO maybe improve output - not log case classes
   println(s"Supported products: [${supportedProducts.map(p => s"${p.id} costs ${p.price}").mkString(",")}]")
   println(s"Supported promotions: [${promotionStrategies.mkString(",")}]")
   println("\n-----\n")

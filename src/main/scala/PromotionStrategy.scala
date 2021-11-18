@@ -13,6 +13,8 @@ sealed trait PromotionStrategy {
          case _ => zero
        }.getOrElse(0)
      }
+
+     override def toString = s"Buy1Get1Free for product: [${product.id}]"
    }
 
    case class Buy3Pay2(product: Product) extends PromotionStrategy {
@@ -26,6 +28,8 @@ sealed trait PromotionStrategy {
            else zero
        }.getOrElse(0)
      }
+
+     override def toString = s"Buy3Pay2 for product: [${product.id}]"
    }
 
    case class Buy2GetAnotherFree(product: Product, freeProductId: String) extends PromotionStrategy {
@@ -40,6 +44,8 @@ sealed trait PromotionStrategy {
          case _ => zero
        }.getOrElse(0)
      }
+
+     override def toString = s"Buy2GetAnotherFree for product: [${product.id}] and freeProductId: [$freeProductId]"
    }
 
  }
