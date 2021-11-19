@@ -3,7 +3,7 @@ import PromotionStrategy.{Buy1Get1Free, Buy2GetAnotherFree, Buy3Pay2}
 object Main extends App {
   val apple = Product("apple", 0.6)
   val orange = Product("orange", 0.25)
-  val banana = Product("orange", 1)
+  val banana = Product("banana", 1)
 
   val supportedProducts = Set(apple, orange, banana)
   val promotionStrategies: Set[PromotionStrategy] = Set(Buy1Get1Free(apple), Buy3Pay2(orange), Buy2GetAnotherFree(orange, banana.id))

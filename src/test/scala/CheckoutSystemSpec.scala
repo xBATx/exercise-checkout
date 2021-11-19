@@ -6,11 +6,16 @@ class CheckoutSystemSpec extends AnyFlatSpec with Matchers {
 
   val apple: Product = Product("apple", 0.6)
   val orange: Product = Product("orange", 0.25)
+  val banana: Product = Product("banana", 1)
 
   val exercise1CheckoutSystem = new CheckoutSystem(Set(apple, orange))
   val exercise2CheckoutSystem = new CheckoutSystem(
     Set(apple, orange),
     Set(Buy1Get1Free(apple), Buy3Pay2(orange))
+  )
+  val exercise3CheckoutSystem = new CheckoutSystem(
+    Set(apple, orange, banana),
+    Set(Buy2GetAnotherFree(apple, banana.id))
   )
 
   "CheckoutSystem.calculatePrice" should "return 0 price if the cart is empty" in {
@@ -31,5 +36,9 @@ class CheckoutSystemSpec extends AnyFlatSpec with Matchers {
 
   it should "apply buy 3 pay 2 promotion for oranges" in {
     exercise2CheckoutSystem.calculatePrice(List("apple", "orange", "orange", "orange")) shouldBe 1.1
+  }
+
+  it should "apply buy 2 pay get another banana for free" in {
+    exercise3CheckoutSystem.calculatePrice(List("apple", "apple", "orange", "banana", "banana")) shouldBe 2.45
   }
 }
